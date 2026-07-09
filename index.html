@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanat Portfolyosu | Taslak</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        header { padding: 4rem 2rem 2rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
+        header h1 { font-size: 2.5rem; font-weight: 300; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #ffffff; }
+        header p { font-size: 1rem; color: #a0a0a0; font-weight: 300; }
+        nav { text-align: center; margin-bottom: 3rem; }
+        nav a { color: #a0a0a0; text-decoration: none; margin: 0 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #ffffff; }
+        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 2rem; }
+        .gallery-item { position: relative; overflow: hidden; background-color: #141414; border-radius: 4px; cursor: pointer; aspect-ratio: 4 / 3; }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
+        .gallery-item:hover img { transform: scale(1.05); }
+        .item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); padding: 1.5rem; opacity: 0; transition: opacity 0.3s ease; }
+        .gallery-item:hover .item-overlay { opacity: 1; }
+        .item-overlay h3 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.2rem; }
+        .item-overlay p { font-size: 0.85rem; color: #cccccc; }
+        .about-section { max-width: 800px; margin: 6rem auto; padding: 0 2rem; text-align: center; }
+        .about-section h2 { font-size: 1.8rem; font-weight: 300; margin-bottom: 1.5rem; letter-spacing: 1px; }
+        .about-section p { color: #a0a0a0; font-size: 1.05rem; margin-bottom: 2rem; }
+        footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid #1a1a1a; color: #666666; font-size: 0.85rem; }
+        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 5, 5, 0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 1000; padding: 2rem; }
+        .lightbox.active { opacity: 1; pointer-events: auto; }
+        .lightbox-content { max-width: 90%; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #ffffff; font-size: 2rem; cursor: pointer; background: none; border: none; }
+        @media (max-width: 768px) { header h1 { font-size: 1.8rem; } .gallery-grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Kuzeninin Adı Soyadı</h1>
+        <p>Resim Öğrencisi & Görsel Sanatçı</p>
+    </header>
+
+    <nav>
+        <a href="#" class="active">Galeri</a>
+        <a href="#about">Hakkımda</a>
+    </nav>
+
+    <main class="gallery-container">
+        <div class="gallery-grid">
+            
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://picsum.photos/800/600?random=1" alt="Eser 1">
+                <div class="item-overlay">
+                    <h3>Eser Başlığı</h3>
+                    <p>Yağlı Boya - 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://picsum.photos/800/600?random=2" alt="Eser 2">
+                <div class="item-overlay">
+                    <h3>Eser Başlığı</h3>
+                    <p>Karakalem - 2026</p>
+                </div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="https://picsum.photos/800/600?random=3" alt="Eser 3">
+                <div class="item-overlay">
+                    <h3>Eser Başlığı</h3>
+                    <p>Dijital Çizim - 2025</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="about-section" id="about">
+        <h2>Hakkımda</h2>
+        <p>Biyografi ve sanatsal vizyon yazısı buraya gelecek.</p>
+        <p style="color: #ffffff; font-size: 0.95rem;">İletişim: mail@adresiniz.com</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
+    </footer>
+
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lightbox-close">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        function openLightbox(element) {
+            lightboxImg.src = element.querySelector('img').src;
+            lightbox.classList.add('active');
+        }
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            setTimeout(() => { lightboxImg.src = ''; }, 400);
+        }
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+    </script>
+</body>
+</html>
