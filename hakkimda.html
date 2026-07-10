@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hakkımda | Simay Gül</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Genel Sıfırlama */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        /* Ana Gövde */
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            background-color: #0a0a0a; 
+            color: #f5f5f5; 
+            line-height: 1.6; 
+        }
+        
+        /* Başlık Alanı */
+        header { padding: 4rem 2rem 2rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
+        header h1 { 
+            font-family: 'Cormorant Garamond', serif; 
+            font-size: 3.5rem; 
+            font-weight: 500; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            margin-bottom: 0.5rem; 
+            color: #ffffff; 
+        }
+        header p { font-size: 1rem; color: #a0a0a0; font-weight: 300; }
+        
+        /* Menü Navigasyonu */
+        nav { text-align: center; margin-bottom: 3rem; }
+        nav a { color: #a0a0a0; text-decoration: none; margin: 0 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
+        nav a:hover, nav a.active { color: #ffffff; }
+        
+        /* Hakkımda İçerik Alanı */
+        .about-content { max-width: 800px; margin: 2rem auto 6rem auto; padding: 0 2rem; text-align: center; }
+        .about-content h2 { font-size: 1.8rem; font-weight: 300; margin-bottom: 2rem; letter-spacing: 1px; color: #ffffff; }
+        .about-content p { color: #cccccc; font-size: 1.1rem; margin-bottom: 1.5rem; line-height: 1.8; }
+        
+        /* İletişim Bilgileri */
+        .contact-info { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #1a1a1a; }
+        .contact-info a { color: #ffffff; text-decoration: none; border-bottom: 1px solid #333; padding-bottom: 2px; transition: border-color 0.3s; }
+        .contact-info a:hover { border-color: #ffffff; }
+        
+        /* Footer */
+        footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid #1a1a1a; color: #666666; font-size: 0.85rem; }
+        
+        /* Mobil Uyum */
+        @media (max-width: 768px) { header h1 { font-size: 2.2rem; } }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Simay Gül</h1>
+        <p>Resim Öğrencisi & Görsel Sanatçı</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Galeri</a>
+        <a href="hakkimda.html" class="active">Hakkımda</a>
+    </nav>
+
+    <main class="about-content">
+        <h2>Biyografi</h2>
+        <p>Buraya sanatçının detaylı biyografisi, sanat vizyonu ve eserlerinde neyi anlatmak istediğiyle ilgili uzun bir metin gelebilir.</p>
+        <p>Eğitim geçmişi, katıldığı sergiler veya atölye çalışmaları da ayrı paragraflar halinde buraya eklenebilir. Artık bu sayfa tamamen metinlere ayrıldığı için istenildiği kadar detay verilebilir.</p>
+        
+        <div class="contact-info">
+            <p>İletişim ve işbirlikleri için:</p>
+            <p><a href="mailto:ornek@mail.com">ornek@mail.com</a></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
+    </footer>
+
+</body>
+</html>
