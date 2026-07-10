@@ -5,13 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simay Gül | Sanat Portfolyosu</title>
 
+    <!-- Google Fonts BAĞLANTILARI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #0a0a0a; color: #f5f5f5; line-height: 1.6; }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+            
+            /* Arka plan resmi ve siyah perde (overlay) efekti eklendi */
+            background-image: linear-gradient(rgba(10, 10, 10, 0.82), rgba(10, 10, 10, 0.82)), url('green-abstract-3840x2160-14254.jpg');
+            background-size: cover;          
+            background-position: center;     
+            background-attachment: fixed;    
+            
+            color: #f5f5f5; 
+            line-height: 1.6; 
+        }
         
         header { padding: 4rem 2rem 2rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
         header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #ffffff; }
@@ -44,7 +57,7 @@
         .lightbox-info-btn { position: absolute; bottom: 2rem; right: 2rem; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; z-index: 1002; backdrop-filter: blur(5px); }
         .lightbox-info-btn:hover { background: rgba(255, 255, 255, 0.25); }
         
-        /* Hikaye Paneli (Genişletildi ve Kaydırma Eklendi) */
+        /* Hikaye Paneli */
         .lightbox-info-panel { position: absolute; bottom: 5rem; right: 2rem; background: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 8px; width: 350px; max-height: 60vh; overflow-y: auto; color: white; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1001; backdrop-filter: blur(15px); }
         .lightbox-info-panel.open { opacity: 1; visibility: visible; transform: translateY(0); }
         .lightbox-info-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 400; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
@@ -81,7 +94,6 @@
             <!-- ESER 1 -->
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://picsum.photos/800/600?random=1" alt="Eser 1">
-                <!-- Galeride Fareyle Üstüne Gelince Çıkan Kısa Bilgi -->
                 <div class="item-overlay">
                     <h3>İsimsiz Kompozisyon</h3>
                     <p>Yağlı Boya - 2026</p>
@@ -150,9 +162,7 @@
         const lightboxInfo = document.getElementById('lightbox-info');
         
         function openLightbox(element) {
-            // Başlığı galerideki h3'ten alır
             lightboxTitle.innerText = element.querySelector('.item-overlay h3').innerText;
-            // Hikayeyi özel hazırladığımız gizli "item-story" kutusundan alır
             lightboxStory.innerHTML = element.querySelector('.item-story').innerHTML;
             
             lightboxImg.src = element.querySelector('img').src;
