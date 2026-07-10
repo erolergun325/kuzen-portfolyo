@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simay Gül | Sanat Portfolyosu</title>
 
+    <!-- Google Fonts BAĞLANTILARI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
@@ -13,7 +14,6 @@
         /* Genel Sıfırlama */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* Ana Gövde */
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
             background-color: #0a0a0a; 
@@ -57,14 +57,29 @@
         /* Footer */
         footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid #1a1a1a; color: #666666; font-size: 0.85rem; }
         
-        /* Büyüteç (Lightbox) Mekanizması */
+        /* Büyüteç (Lightbox) Ana Mekanizma */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 5, 5, 0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 1000; padding: 2rem; }
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox-content { max-width: 90%; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; }
-        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #ffffff; font-size: 2rem; cursor: pointer; background: none; border: none; }
+        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #ffffff; font-size: 2rem; cursor: pointer; background: none; border: none; z-index: 1002; }
         
+        /* Büyüteç İçi: Detaylar Butonu */
+        .lightbox-info-btn { position: absolute; bottom: 2rem; right: 2rem; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; z-index: 1002; backdrop-filter: blur(5px); }
+        .lightbox-info-btn:hover { background: rgba(255, 255, 255, 0.25); }
+        
+        /* Büyüteç İçi: Açılır Kapanır Bilgi Paneli */
+        .lightbox-info-panel { position: absolute; bottom: 5rem; right: 2rem; background: rgba(15, 15, 15, 0.7); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 8px; width: 300px; color: white; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1001; backdrop-filter: blur(15px); }
+        .lightbox-info-panel.open { opacity: 1; visibility: visible; transform: translateY(0); }
+        .lightbox-info-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 0.5rem; font-weight: 400; color: #ffffff; }
+        .lightbox-info-panel p { font-size: 0.95rem; color: #cccccc; }
+
         /* Mobil Uyum */
-        @media (max-width: 768px) { header h1 { font-size: 2.2rem; } .gallery-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { 
+            header h1 { font-size: 2.2rem; } 
+            .gallery-grid { grid-template-columns: 1fr; } 
+            .lightbox-info-panel { right: 5%; width: 90%; bottom: 5rem; padding: 1.5rem; }
+            .lightbox-info-btn { right: 5%; bottom: 1.5rem; }
+        }
     </style>
 </head>
 <body>
@@ -85,15 +100,15 @@
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://picsum.photos/800/600?random=1" alt="Eser 1">
                 <div class="item-overlay">
-                    <h3>Eser Başlığı</h3>
-                    <p>Yağlı Boya - 2026</p>
+                    <h3>İsimsiz Kompozisyon</h3>
+                    <p>Yağlı Boya, Tuval Üzerine - 2026</p>
                 </div>
             </div>
 
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://picsum.photos/800/600?random=2" alt="Eser 2">
                 <div class="item-overlay">
-                    <h3>Eser Başlığı</h3>
+                    <h3>Gölgenin Oyunu</h3>
                     <p>Karakalem - 2026</p>
                 </div>
             </div>
@@ -101,7 +116,7 @@
             <div class="gallery-item" onclick="openLightbox(this)">
                 <img src="https://picsum.photos/800/600?random=3" alt="Eser 3">
                 <div class="item-overlay">
-                    <h3>Eser Başlığı</h3>
+                    <h3>Soyut Düşünceler</h3>
                     <p>Dijital Çizim - 2025</p>
                 </div>
             </div>
@@ -113,25 +128,55 @@
         <p>&copy; 2026 Tüm Hakları Saklıdır.</p>
     </footer>
 
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="lightbox-close">&times;</button>
+    <!-- Gelişmiş Büyüteç (Lightbox) Katmanı -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <img class="lightbox-content" id="lightbox-img" src="" alt="">
+        
+        <!-- Sağ Alt Köşedeki Etkileşim Elemanları -->
+        <button class="lightbox-info-btn" onclick="toggleInfo()">Detaylar</button>
+        
+        <div class="lightbox-info-panel" id="lightbox-info">
+            <h3 id="lightbox-title">Eser Adı</h3>
+            <p id="lightbox-desc">Eser Detayı</p>
+        </div>
     </div>
 
+    <!-- Büyüteç Animasyon ve Veri Çekme Scripti -->
     <script>
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxDesc = document.getElementById('lightbox-desc');
+        const lightboxInfo = document.getElementById('lightbox-info');
         
         function openLightbox(element) {
+            // Tıklanan resmin altındaki yazıları alıp panele yazar
+            lightboxTitle.innerText = element.querySelector('h3').innerText;
+            lightboxDesc.innerText = element.querySelector('p').innerText;
+            
             lightboxImg.src = element.querySelector('img').src;
             lightbox.classList.add('active');
+            lightboxInfo.classList.remove('open'); // Her yeni resimde paneli kapalı başlat
         }
         
         function closeLightbox() {
             lightbox.classList.remove('active');
+            lightboxInfo.classList.remove('open');
             setTimeout(() => { lightboxImg.src = ''; }, 400);
         }
         
+        // "Detaylar" butonuna basınca paneli aç/kapat
+        function toggleInfo() {
+            lightboxInfo.classList.toggle('open');
+        }
+        
+        // Kullanıcı resmin dışındaki siyah boşluğa tıklarsa pencereyi kapatır
+        lightbox.addEventListener('click', (e) => { 
+            if (e.target === lightbox) { closeLightbox(); }
+        });
+        
+        // ESC tuşuna basıldığında pencereyi kapatır
         document.addEventListener('keydown', (e) => { 
             if (e.key === 'Escape') closeLightbox(); 
         });
