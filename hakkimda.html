@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hakkımda | Simay Gül</title>
 
-    <!-- Google Fonts BAĞLANTILARI -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
@@ -43,25 +42,25 @@
             display: flex; 
             gap: 4rem; 
             align-items: flex-start; 
-            background: rgba(15, 15, 15, 0.6); /* Yarı saydam arka plan */
+            background: rgba(15, 15, 15, 0.6); 
             padding: 3rem; 
             border-radius: 12px; 
             border: 1px solid rgba(255,255,255,0.05); 
-            backdrop-filter: blur(15px); /* Arkadaki yeşilliği bulandıran cam efekti */
+            backdrop-filter: blur(15px); 
             box-shadow: 0 20px 40px rgba(0,0,0,0.4);
         }
         
         /* Sol Taraf: Fotoğraf Alanı */
-        .about-image { flex: 0 0 300px; } /* Fotoğrafın genişliği sabit 300px yapıldı */
+        .about-image { flex: 0 0 300px; } 
         .about-image img { 
             width: 100%; 
             border-radius: 8px; 
             object-fit: cover; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            /* Fotoğraf siyah-beyaz olsun istersen alttaki satırın başındaki yorum işaretini kaldırabilirsin */
+            /* Siyah-beyaz efekt istersen alttaki satırın başındaki /* işaretini sil */
             /* filter: grayscale(100%); transition: filter 0.3s ease; */
         }
-        /* .about-image img:hover { filter: grayscale(0%); } */ /* Üzerine gelince renklensin istersen */
+        /* .about-image img:hover { filter: grayscale(0%); } */
         
         /* Sağ Taraf: Metin Alanı */
         .about-text { flex: 1; text-align: left; }
@@ -85,7 +84,7 @@
         /* Footer */
         footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); color: #666666; font-size: 0.85rem; }
         
-        /* Mobil Uyum (Ekran daralınca resim üste, yazı alta geçer) */
+        /* Mobil Uyum */
         @media (max-width: 768px) { 
             header h1 { font-size: 2.2rem; } 
             .about-wrapper { flex-direction: column; align-items: center; gap: 2rem; padding: 2rem; text-align: center; }
@@ -109,20 +108,17 @@
     <main class="about-container">
         <div class="about-wrapper">
             
-            <!-- SOL TARAF: SANATÇI FOTOĞRAFI -->
             <div class="about-image">
-                <!-- Simay'ın fotoğrafı geldiğinde alttaki linki (src="...") değiştireceksin -->
-                <img src="https://picsum.photos/600/800?random=10" alt="Simay Gül Portre">
+                <img src="resimler/simay-biyografi.jpeg" alt="Simay Gül Portre">
             </div>
             
-            <!-- SAĞ TARAF: BİYOGRAFİ METNİ -->
             <div class="about-text">
                 <h2>Biyografi</h2>
-                <p>Buraya sanatçının detaylı biyografisi, sanat vizyonu ve eserlerinde neyi anlatmak istediğiyle ilgili uzun bir metin gelebilir. Sol taraftaki fotoğraf ile uyum içinde okunacaktır.</p>
                 
-                <p>Eğitim geçmişi, katıldığı sergiler veya atölye çalışmaları da ayrı paragraflar halinde eklenebilir. Yeni eklediğimiz cam (glassmorphism) arka plan sayesinde metinler harika bir okunabilirliğe kavuştu.</p>
+                <p>Buraya sanatçının detaylı biyografisi, sanat vizyonu ve eserlerinde neyi anlatmak istediğiyle ilgili uzun bir metin gelecek. Şimdilik bu alan test amaçlı doldurulmuştur.</p>
                 
-                <!-- İletişim Bölümü -->
+                <p>Eğitim geçmişi, katıldığı sergiler veya atölye çalışmaları da ayrı paragraflar halinde buraya eklenebilir. Yeni metinler eklendikçe sayfa aşağı doğru şık bir şekilde uzayacaktır.</p>
+                
                 <div class="contact-info">
                     <h3>İletişim & İşbirlikleri</h3>
                     <p><a href="mailto:ornek@mail.com">ornek@mail.com</a></p>

@@ -10,95 +10,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 
     <style>
-        /* Genel Sıfırlama */
         * { box-sizing: border-box; margin: 0; padding: 0; }
         
         body { 
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            
-            /* Özel tasarım arka plan resmi ve siyah cam (overlay) efekti */
             background-image: linear-gradient(rgba(10, 10, 10, 0.82), rgba(10, 10, 10, 0.82)), url('green-abstract-3840x2160-14254.jpg');
             background-size: cover;          
             background-position: center;     
             background-attachment: fixed;    
-            
             color: #f5f5f5; 
             line-height: 1.6; 
         }
         
-        /* Başlık Alanı */
         header { padding: 4rem 2rem 2rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
-        header h1 { 
-            font-family: 'Cormorant Garamond', serif; 
-            font-size: 3.5rem; 
-            font-weight: 500; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            margin-bottom: 0.5rem; 
-            color: #ffffff; 
-        }
+        header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #ffffff; }
         header p { font-size: 1rem; color: #a0a0a0; font-weight: 300; }
         
-        /* Menü Navigasyonu */
         nav { text-align: center; margin-bottom: 3rem; }
         nav a { color: #a0a0a0; text-decoration: none; margin: 0 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
         nav a:hover, nav a.active { color: #ffffff; }
         
-        /* Galeri Düzeni (Simetrik Flexbox Yapısı) */
         .gallery-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; margin-bottom: 6rem; }
         
-        .gallery-grid { 
-            display: flex; 
-            flex-wrap: wrap; 
-            justify-content: center; /* Alt satırdaki az resimleri daima tam ortalar */
-            gap: 2rem; 
-        }
+        .gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
         
-        /* Galeri Kartları */
-        .gallery-item { 
-            width: 380px; /* Kartların masaüstündeki standart genişliği */
-            max-width: 100%; /* Mobilde ekrandan taşmaması için */
-            position: relative; 
-            overflow: hidden; 
-            background-color: #141414; 
-            border-radius: 4px; 
-            cursor: pointer; 
-            aspect-ratio: 4 / 3; 
-        }
+        .gallery-item { width: 380px; max-width: 100%; position: relative; overflow: hidden; background-color: #141414; border-radius: 4px; cursor: pointer; aspect-ratio: 4 / 3; }
         .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
         .gallery-item:hover img { transform: scale(1.05); }
         
-        /* Resim Üzeri Yazılar (Hover) */
         .item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); padding: 1.5rem; opacity: 0; transition: opacity 0.3s ease; }
         .gallery-item:hover .item-overlay { opacity: 1; }
         .item-overlay h3 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.2rem; }
         .item-overlay p { font-size: 0.85rem; color: #cccccc; }
         
-        /* Footer */
         footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #666666; font-size: 0.85rem; }
         
-        /* Büyüteç (Lightbox) Katmanı */
         .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 5, 5, 0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 1000; padding: 2rem; }
         .lightbox.active { opacity: 1; pointer-events: auto; }
         .lightbox-content { max-width: 90%; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; }
         .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #ffffff; font-size: 2rem; cursor: pointer; background: none; border: none; z-index: 1002; }
         
-        /* "Eserin Hikayesi" Butonu */
-        .lightbox-info-btn { position: absolute; bottom: 2rem; right: 2rem; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; z-index: 1002; backdrop-filter: blur(5px); }
+        .lightbox-info-btn { position: absolute; bottom: 2rem; right: 2rem; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; z-index: 1002; backdrop-filter: blur(5px); display: none; }
         .lightbox-info-btn:hover { background: rgba(255, 255, 255, 0.25); }
         
-        /* Kayarak Açılan Cam Efektli Hikaye Paneli */
         .lightbox-info-panel { position: absolute; bottom: 5rem; right: 2rem; background: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 8px; width: 350px; max-height: 60vh; overflow-y: auto; color: white; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1001; backdrop-filter: blur(15px); }
         .lightbox-info-panel.open { opacity: 1; visibility: visible; transform: translateY(0); }
         .lightbox-info-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 400; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
         .lightbox-info-panel p { font-size: 0.95rem; color: #cccccc; line-height: 1.7; margin-bottom: 0.5rem; }
 
-        /* Panel İçi Kaydırma Çubuğu Özelleştirmesi */
         .lightbox-info-panel::-webkit-scrollbar { width: 6px; }
         .lightbox-info-panel::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
         .lightbox-info-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
 
-        /* Mobil Uyum */
         @media (max-width: 768px) { 
             header h1 { font-size: 2.2rem; } 
             .lightbox-info-panel { right: 5%; width: 90%; bottom: 5rem; padding: 1.5rem; }
@@ -110,7 +73,7 @@
 
     <header>
         <h1>Simay Gül</h1>
-        <p>Resim Öğnesi & Görsel Sanatçı</p>
+        <p>Resim Öğrencisi & Görsel Sanatçı</p>
     </header>
 
     <nav>
@@ -122,51 +85,165 @@
         <div class="gallery-grid">
             
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://picsum.photos/800/600?random=1" alt="Eser 1">
+                <img src="resimler/resim1.jpeg" alt="Eser 1">
                 <div class="item-overlay">
-                    <h3>İsimsiz Kompozisyon</h3>
-                    <p>Yağlı Boya - 2026</p>
+                    <h3>Eser Adı Eklenecek 1</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
                 </div>
-                <div class="item-story" style="display: none;">
-                    <p>Bu eser, sonbaharın ilk günlerinde atölyemin camına vuran yağmur damlalarından ilham alınarak yapıldı.</p>
-                    <p>Renklerin birbirine karışımı, zihnimdeki karmaşanın tuvale yansımasıdır. Yağlı boyanın o yoğun dokusunu bilerek tercih ettim, çünkü duyguların da bir ağırlığı olduğuna inanıyorum.</p>
-                </div>
+                <div class="item-story" style="display: none;"></div>
             </div>
 
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://picsum.photos/800/600?random=2" alt="Eser 2">
+                <img src="resimler/resim2.jpeg" alt="Eser 2">
                 <div class="item-overlay">
-                    <h3>Gölgenin Oyunu</h3>
-                    <p>Karakalem - 2026</p>
+                    <h3>Eser Adı Eklenecek 2</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
                 </div>
-                <div class="item-story" style="display: none;">
-                    <p>Sadece ışık ve gölge kullanarak bir insanın ruh halini ne kadar yansıtabiliriz? Bu soruyla yola çıktım.</p>
-                    <p>Karakalemin o sert ve net çizgileri, hayatımızdaki keskin kararları temsil ediyor. Eserin yapımı yaklaşık 3 hafta sürdü.</p>
-                </div>
+                <div class="item-story" style="display: none;"></div>
             </div>
 
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://picsum.photos/800/600?random=3" alt="Eser 3">
+                <img src="resimler/resim3.jpeg" alt="Eser 3">
                 <div class="item-overlay">
-                    <h3>Soyut Düşünceler</h3>
-                    <p>Dijital Çizim - 2025</p>
+                    <h3>Eser Adı Eklenecek 3</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
                 </div>
-                <div class="item-story" style="display: none;">
-                    <p>Geleneksel boyalardan uzaklaşıp dijital fırçalarla kendimi ifade etmeyi denediğim ilk serilerimden biri.</p>
-                    <p>Burada sınırsız renk paletinin verdiği özgürlüğü sonuna kadar kullandım.</p>
-                </div>
+                <div class="item-story" style="display: none;"></div>
             </div>
 
             <div class="gallery-item" onclick="openLightbox(this)">
-                <img src="https://picsum.photos/800/600?random=4" alt="Eser 4">
+                <img src="resimler/resim4.jpeg" alt="Eser 4">
                 <div class="item-overlay">
-                    <h3>Doğanın Rhythmi</h3>
-                    <p>Akrilik - 2026</p>
+                    <h3>Eser Adı Eklenecek 4</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
                 </div>
-                <div class="item-story" style="display: none;">
-                    <p>Doğadaki mikro ve makro organizmaların hareketlerinden esinlenerek oluşturulmuş soyut bir çalışma.</p>
-                    <p>Katman katman sürülen boyalar, zamanın akışını ve doğanın döngüsünü sembolize ediyor.</p>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim5.jpeg" alt="Eser 5">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 5</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
                 </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim6.jpeg" alt="Eser 6">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 6</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim7.jpeg" alt="Eser 7">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 7</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim8.jpeg" alt="Eser 8">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 8</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim9.jpeg" alt="Eser 9">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 9</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim10.jpeg" alt="Eser 10">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 10</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim11.jpeg" alt="Eser 11">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 11</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim12.jpeg" alt="Eser 12">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 12</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim13.jpeg" alt="Eser 13">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 13</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim14.jpeg" alt="Eser 14">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 14</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim15.jpeg" alt="Eser 15">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 15</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim16.jpeg" alt="Eser 16">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 16</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim17.jpeg" alt="Eser 17">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 17</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
+            </div>
+
+            <div class="gallery-item" onclick="openLightbox(this)">
+                <img src="resimler/resim18.jpeg" alt="Eser 18">
+                <div class="item-overlay">
+                    <h3>Eser Adı Eklenecek 18</h3>
+                    <p>Teknik / Malzeme - Yıl</p>
+                </div>
+                <div class="item-story" style="display: none;"></div>
             </div>
 
         </div>
@@ -180,12 +257,11 @@
         <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
         <img class="lightbox-content" id="lightbox-img" src="" alt="">
         
-        <button class="lightbox-info-btn" onclick="toggleInfo()">Eserin Hikayesi</button>
+        <button class="lightbox-info-btn" id="lightbox-btn" onclick="toggleInfo()">Eserin Hikayesi</button>
         
         <div class="lightbox-info-panel" id="lightbox-info">
             <h3 id="lightbox-title">Eser Adı</h3>
-            <div id="lightbox-story">
-                </div>
+            <div id="lightbox-story"></div>
         </div>
     </div>
 
@@ -195,10 +271,21 @@
         const lightboxTitle = document.getElementById('lightbox-title');
         const lightboxStory = document.getElementById('lightbox-story');
         const lightboxInfo = document.getElementById('lightbox-info');
+        const lightboxBtn = document.getElementById('lightbox-btn');
         
         function openLightbox(element) {
             lightboxTitle.innerText = element.querySelector('.item-overlay h3').innerText;
-            lightboxStory.innerHTML = element.querySelector('.item-story').innerHTML;
+            
+            // Akıllı Kontrol Sistemi
+            const storyContainer = element.querySelector('.item-story');
+            
+            if (storyContainer && storyContainer.innerHTML.trim() !== "") {
+                lightboxStory.innerHTML = storyContainer.innerHTML;
+                lightboxBtn.style.display = 'block'; 
+            } else {
+                lightboxStory.innerHTML = '';
+                lightboxBtn.style.display = 'none';  
+            }
             
             lightboxImg.src = element.querySelector('img').src;
             lightbox.classList.add('active');
