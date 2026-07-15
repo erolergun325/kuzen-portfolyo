@@ -9,65 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap" rel="stylesheet">
 
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        
-        body { 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
-            background-image: linear-gradient(rgba(10, 10, 10, 0.82), rgba(10, 10, 10, 0.82)), url('green-abstract-3840x2160-14254.jpg');
-            background-size: cover;          
-            background-position: center;     
-            background-attachment: fixed;    
-            color: #f5f5f5; 
-            line-height: 1.6; 
-        }
-        
-        header { padding: 4rem 2rem 2rem 2rem; text-align: center; max-width: 1200px; margin: 0 auto; }
-        header h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.5rem; font-weight: 500; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; color: #ffffff; }
-        header p { font-size: 1rem; color: #a0a0a0; font-weight: 300; }
-        
-        nav { text-align: center; margin-bottom: 3rem; }
-        nav a { color: #a0a0a0; text-decoration: none; margin: 0 1rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1px; transition: color 0.3s; }
-        nav a:hover, nav a.active { color: #ffffff; }
-        
-        .gallery-container { max-width: 1400px; margin: 0 auto; padding: 0 2rem; margin-bottom: 6rem; }
-        
-        .gallery-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; }
-        
-        .gallery-item { width: 380px; max-width: 100%; position: relative; overflow: hidden; background-color: #141414; border-radius: 4px; cursor: pointer; aspect-ratio: 4 / 3; }
-        .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); }
-        .gallery-item:hover img { transform: scale(1.05); }
-        
-        .item-overlay { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0, 0, 0, 0.85)); padding: 1.5rem; opacity: 0; transition: opacity 0.3s ease; }
-        .gallery-item:hover .item-overlay { opacity: 1; }
-        .item-overlay h3 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.2rem; }
-        .item-overlay p { font-size: 0.85rem; color: #cccccc; }
-        
-        footer { padding: 4rem 2rem; text-align: center; border-top: 1px solid rgba(255, 255, 255, 0.05); color: #666666; font-size: 0.85rem; }
-        
-        .lightbox { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(5, 5, 5, 0.98); display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; z-index: 1000; padding: 2rem; }
-        .lightbox.active { opacity: 1; pointer-events: auto; }
-        .lightbox-content { max-width: 90%; max-height: 85vh; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; }
-        .lightbox-close { position: absolute; top: 2rem; right: 2rem; color: #ffffff; font-size: 2rem; cursor: pointer; background: none; border: none; z-index: 1002; }
-        
-        .lightbox-info-btn { position: absolute; bottom: 2rem; right: 2rem; background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.3); padding: 0.6rem 1.5rem; border-radius: 30px; cursor: pointer; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; z-index: 1002; backdrop-filter: blur(5px); display: none; }
-        .lightbox-info-btn:hover { background: rgba(255, 255, 255, 0.25); }
-        
-        .lightbox-info-panel { position: absolute; bottom: 5rem; right: 2rem; background: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255,255,255,0.1); padding: 2rem; border-radius: 8px; width: 350px; max-height: 60vh; overflow-y: auto; color: white; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); z-index: 1001; backdrop-filter: blur(15px); }
-        .lightbox-info-panel.open { opacity: 1; visibility: visible; transform: translateY(0); }
-        .lightbox-info-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; margin-bottom: 1rem; font-weight: 400; color: #ffffff; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem; }
-        .lightbox-info-panel p { font-size: 0.95rem; color: #cccccc; line-height: 1.7; margin-bottom: 0.5rem; }
-
-        .lightbox-info-panel::-webkit-scrollbar { width: 6px; }
-        .lightbox-info-panel::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
-        .lightbox-info-panel::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
-
-        @media (max-width: 768px) { 
-            header h1 { font-size: 2.2rem; } 
-            .lightbox-info-panel { right: 5%; width: 90%; bottom: 5rem; padding: 1.5rem; }
-            .lightbox-info-btn { right: 5%; bottom: 1.5rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="dil-secenekleri">
