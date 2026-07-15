@@ -208,7 +208,66 @@
 
             </div>
     </main>
+<footer>
+        <p>&copy; 2026 All Rights Reserved.</p>
+    </footer>
 
-    <script src="script.js"></script> 
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img class="lightbox-content" id="lightbox-img" src="" alt="">
+        
+        <button class="lightbox-info-btn" id="lightbox-btn" onclick="toggleInfo()">Eserin Hikayesi</button>
+        
+        <div class="lightbox-info-panel" id="lightbox-info">
+            <h3 id="lightbox-title">Eser Adı</h3>
+            <div id="lightbox-story"></div>
+        </div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxTitle = document.getElementById('lightbox-title');
+        const lightboxStory = document.getElementById('lightbox-story');
+        const lightboxInfo = document.getElementById('lightbox-info');
+        const lightboxBtn = document.getElementById('lightbox-btn');
+        
+        function openLightbox(element) {
+            lightboxTitle.innerText = element.querySelector('.item-overlay h3').innerText;
+            
+            // Akıllı Kontrol Sistemi
+            const storyContainer = element.querySelector('.item-story');
+            
+            if (storyContainer && storyContainer.innerHTML.trim() !== "") {
+                lightboxStory.innerHTML = storyContainer.innerHTML;
+                lightboxBtn.style.display = 'block'; 
+            } else {
+                lightboxStory.innerHTML = '';
+                lightboxBtn.style.display = 'none';  
+            }
+            
+            lightboxImg.src = element.querySelector('img').src;
+            lightbox.classList.add('active');
+            lightboxInfo.classList.remove('open'); 
+        }
+        
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxInfo.classList.remove('open');
+            setTimeout(() => { lightboxImg.src = ''; }, 400);
+        }
+        
+        function toggleInfo() {
+            lightboxInfo.classList.toggle('open');
+        }
+        
+        lightbox.addEventListener('click', (e) => { 
+            if (e.target === lightbox) { closeLightbox(); }
+        });
+        
+        document.addEventListener('keydown', (e) => { 
+            if (e.key === 'Escape') closeLightbox(); 
+        });
+    </script>
 </body>
 </html>
